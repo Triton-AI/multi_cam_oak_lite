@@ -25,7 +25,7 @@ class MultiCamNode(Node):
         
 
 
-    def getPipeline(self, preview_res = (600, 300)):
+    def getPipeline(self, preview_res = (1448, 568)):
         # Start defining a pipeline
         pipeline = dai.Pipeline()
 
