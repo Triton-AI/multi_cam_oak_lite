@@ -106,7 +106,6 @@ class MultiCamNode(Node):
                     if key == ord('s'):
                         cv2.imwrite(os.path.join(path, str(img_cnt) + '.bmp'), in_rgb.getCvFrame())
                         print("Saved image: ", img_cnt)
-                        img_cnt += 1
                     elif key == ord('q'):
                         exit("user quit")
 
