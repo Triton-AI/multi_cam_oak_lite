@@ -115,7 +115,7 @@ class MultiCamNode(Node):
 def main():
     rclpy.init()
     cam_node = MultiCamNode()
-    cam_node.camera_initialization(debug=True, path ='/home/chengjing/Desktop/cv_img_save')
+    cam_node.camera_initialization(debug=False, path ='/home/chengjing/Desktop/cv_img_save')
 
 if __name__ == "main":
     main()
