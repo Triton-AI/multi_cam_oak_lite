@@ -30,17 +30,18 @@ class MultiCamNode(Node):
         pipeline = dai.Pipeline()
 
         # Define a source - color camera
-        cam_rgb = pipeline.create(dai.node.ColorCamera)
+        cam_rgb = pipeline.create(dai.node.Camera).build()
         # For the demo, just set a larger RGB preview size for OAK-D
-        cam_rgb.setPreviewSize(preview_res[0], preview_res[1]) # FIX ME, need to match what ever pipeline we are using
-        cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
-        cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
-        cam_rgb.setInterleaved(False)
+        cam_output = cam_rgb.requestOutput((preview_res[0], preview_res[1]), type=dai.ImgFrame.Type.RGB888p) # TODO: need to match what ever pipeline we are using
+        # cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
+        # cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+        # cam_rgb.setInterleaved(False)
 
         # Create output
-        xout_rgb = pipeline.create(dai.node.XLinkOut)
-        xout_rgb.setStreamName("rgb")
-        cam_rgb.preview.link(xout_rgb.input)
+        # xout_rgb = pipeline.create(dai.node.XLinkOut)
+        # xout_rgb.setStreamName("rgb")
+        # cam_rgb.preview.link(xout_rgb.input)
+        output_queue = cam_output.createOutputQueue()
 
         return pipeline
 
