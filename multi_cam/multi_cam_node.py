@@ -33,14 +33,8 @@ class MultiCamNode(Node):
         cam_rgb = pipeline.create(dai.node.Camera).build()
         # For the demo, just set a larger RGB preview size for OAK-D
         cam_output = cam_rgb.requestOutput((preview_res[0], preview_res[1]), type=dai.ImgFrame.Type.RGB888p) # TODO: need to match what ever pipeline we are using
-        # cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
-        # cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
-        # cam_rgb.setInterleaved(False)
 
         # Create output
-        # xout_rgb = pipeline.create(dai.node.XLinkOut)
-        # xout_rgb.setStreamName("rgb")
-        # cam_rgb.preview.link(xout_rgb.input)
         output_queue = cam_output.createOutputQueue()
 
         return pipeline
@@ -57,13 +51,11 @@ class MultiCamNode(Node):
                 print("Found", len(device_infos), "devices")
 
             for device_info in device_infos:
-                openvino_version = dai.OpenVINO.Version.VERSION_2021_4
-                usb2_mode = False
-                device = stack.enter_context(dai.Device(openvino_version, device_info, usb2_mode))
+                device = stack.enter_context(dai.Device(device_info))
 
                 # Note: currently on POE, DeviceInfo.getMxId() and Device.getMxId() are different!
-                print("=== Connected to " + device_info.getMxId())
-                mxid = device.getMxId()
+                print("=== Connected to " + device_info.getDeviceId())
+                mxid = device.getDeviceId()
                 cameras = device.getConnectedCameras()
                 usb_speed = device.getUsbSpeed()
                 print("   >>> MXID:", mxid)
