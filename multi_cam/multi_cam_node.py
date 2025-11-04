@@ -22,22 +22,22 @@ class MultiCamNode(Node):
         for i in range(self.num_devices):
              self.cam_publishers.append(self.create_publisher(Image, "camera/image_" + str(i), 10))
         self.bridge = CvBridge()
-        
 
-
-    def getPipeline(self, preview_res = (1448, 568)):
+    def getPipelineAndOutputQueue(self, preview_res = (1448, 568)):
         # Start defining a pipeline
         pipeline = dai.Pipeline()
 
         # Define a source - color camera
         cam_rgb = pipeline.create(dai.node.Camera).build()
         # For the demo, just set a larger RGB preview size for OAK-D
-        cam_output = cam_rgb.requestOutput((preview_res[0], preview_res[1]), type=dai.ImgFrame.Type.RGB888p) # TODO: need to match what ever pipeline we are using
-
+        cam_output = cam_rgb.requestOutput((preview_res[0], preview_res[1]), type=dai.ImgFrame.Type.BRG888p) # TODO: need to match what ever pipeline we are using
+        cam_rgb.setBoardSocket(dai.CameraBoardSocket.RGB)
+        cam_rgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+        cam_rgb.setInterleaved(False)
         # Create output
         output_queue = cam_output.createOutputQueue()
 
-        return pipeline
+        return pipeline, output_queue
 
 
     def camera_initialization(self, debug = False, path = "./"):
@@ -64,12 +64,11 @@ class MultiCamNode(Node):
 
 
                 # Get a customized pipeline based on identified device type
-                pipeline = self.getPipeline()
+                pipeline, q_rgb = self.getPipelineAndOutputQueue()
                 print("   >>> Loading pipeline for: OAK-D-LITE")
-                device.startPipeline(pipeline)
+                pipeline.start()
 
                 # Output queue will be used to get the rgb frames from the output defined above
-                q_rgb = device.getOutputQueue(name="rgb", maxSize=4, blocking=False)
                 stream_name = "rgb-" + mxid + "-" + "OAK-D"
                 self.q_rgb_list.append((q_rgb, stream_name))
 
@@ -79,7 +78,7 @@ class MultiCamNode(Node):
             else:
                 while True:
                     for i, (q_rgb, _) in enumerate(self.q_rgb_list):
-                        in_rgb = q_rgb.tryGet()
+                        in_rgb = q_rgb.get()
                         if in_rgb is not None:
                             img_msg = self.bridge.cv2_to_imgmsg(in_rgb.getCvFrame(), "bgr8")
                             self.cam_publishers[i].publish(img_msg)
