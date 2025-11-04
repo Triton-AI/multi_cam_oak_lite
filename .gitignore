@@ -1,0 +1,143 @@
+# big binary file
+core
+
+# Mac artifacts
+.DS_Store
+**/.DS_Store
+
+# ROS2 build folders.
+**/build/**
+**/install/**
+**/build_isolated/**
+**/install_isolated/**
+**/devel/**
+*cmake-build*
+tests/
+
+# Core external dependencies.
+
+
+# External dependencies
+
+
+# Log directories.
+**/log/**
+**/logs/**
+**/log_folder/**
+
+# Python caches.
+**/__pycache__/**
+**/.eggs/**
+
+# Test files for Docker images.
+artifacts.zip
+ros-deps
+
+# Environment for svl_tests.
+.svl_tests_env
+
+# File produced by RVC.
+recorded_path.csv
+*py.csv
+
+# File for deploy.sh
+install_private_token
+
+## Coverage and Doxygen Artifacts
+lcov/
+.cov/
+html/
+xml/
+latex/
+.coverage*
+.msg.md
+/docs/_build
+/coverage
+lcov.base
+lcov.test
+lcov.total
+lcov.total.filtered
+
+## XCode / Mac Artifacts
+.DS_Store
+**/.DS_Store
+xcuserdata/
+
+## MSVC Artifacts
+.vscode/
+.vs/
+.devcontainer/
+
+## CLion Artifacts
+cmake-build-debug
+.cmake-build-debug
+.idea
+
+## Clang Complete Artifacts (used by Atom)
+/.clang_complete
+/tags
+
+## Valgrind and Callgrind
+vgcore.*
+*.log
+*.out*
+
+## Vizdep
+*.dot
+*.pickle
+*.svg
+
+## X-Compile Artifacts
+target_fs/
+
+## Miscellaneous
+*.cmd
+*.tmp
+*.user
+*.db
+*.opendb
+*.swp
+*.swo
+*.gch
+*.patch
+
+## python notebook checkpoints
+*.ipynb_checkpoints/
+
+## ACT files
+*.env
+!example.env
+
+## VCS files
+src/external/**
+
+## Frames
+*.gv
+*.pdf
+
+# ROS Bag files
+*.db3
+*.mcap
+
+# RDE Logs
+*.fbl
+
+# Doxygen output
+cross_reference
+docs_build
+docs_output
+
+# casadi JIT
+jit_*.c
+tmp_*.o
+
+# Script outs
+*.zip
+
+tmp_*
+
+# Neural Network Model Files
+*.engine
+*.onnx
+*.pt
+*.pth
