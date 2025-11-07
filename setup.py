@@ -11,10 +11,12 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    # Pin numpy to <2 to avoid runtime failures with binary extensions
+    # that were compiled against NumPy 1.x (e.g. some OpenCV wheels).
+    install_requires=['setuptools', 'numpy<2'],
     zip_safe=True,
-    maintainer='chengjing',
-    maintainer_email='cyuan@ucsd.edu',
+    maintainer='Winston Chou',
+    maintainer_email='w3chou@ucsd.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],

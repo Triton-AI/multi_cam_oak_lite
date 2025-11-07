@@ -4,14 +4,24 @@
   <name>multi_cam</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="cyuan@ucsd.edu">chengjing</maintainer>
+  <maintainer email="w3chou@ucsd.edu">Winston Chou</maintainer>
+  <author email="cyuan@ucsd.edu">chengjing</author>
   <license>TODO: License declaration</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
   <test_depend>ament_pep257</test_depend>
   <test_depend>python3-pytest</test_depend>
+
   <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>cv_bridge</depend>
+  <depend>opencv-python</depend>
+  <depend>message_filters</depend>
+
+  <depend>numpy</depend>
+  <depend>depthai</depend>
 
   <export>
     <build_type>ament_python</build_type>
