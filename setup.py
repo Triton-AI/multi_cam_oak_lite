@@ -19,7 +19,11 @@ setup(
     maintainer_email='w3chou@ucsd.edu',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'cams = multi_cam.multi_cam_node:main',
