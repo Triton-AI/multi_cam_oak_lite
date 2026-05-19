@@ -20,7 +20,7 @@ class MultiCamNode(Node):
         self.q_rgb_list = []
         self.cam_publishers = []
         for i in range(self.num_devices):
-             self.cam_publishers.append(self.create_publisher(Image, "camera/image_" + str(i), 10))
+             self.cam_publishers.append(self.create_publisher(Image, "camera/color/image_" + str(i), 10))
         self.bridge = CvBridge()
 
     def getPipelineAndOutputQueue(self, pipeline, preview_res = (1280, 800)):
